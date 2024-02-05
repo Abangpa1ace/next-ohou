@@ -1,3 +1,5 @@
+import MainHeader from "@/components/shared/MainHeader/MainHeader";
+import StyledComponentsRegistry from "@/lib/RootStyleRegistry";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
@@ -16,7 +18,18 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <head>
+        <link
+          rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+        />
+      </head>
+      <body className={inter.className}>
+        <StyledComponentsRegistry>
+          <MainHeader />
+        </StyledComponentsRegistry>
+        {children}
+      </body>
     </html>
   );
 }

@@ -1,6 +1,7 @@
 :root {
   /* color variables */
   --white: #ffffff;
+  --gray-60: #eaedef;
   --gray-80: #dadde0;
   --gray-300: #2f3438;
   --blue-400: #35c5f0;
@@ -89,6 +90,7 @@ section,
 summary,
 time,
 mark,
+input,
 audio,
 video {
   margin: 0;

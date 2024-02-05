@@ -1,6 +1,7 @@
 import MainLogo from "@/components/shared/icons/MainLogo";
 import HeaderNav from "@/components/shared/MainHeader/Top/HeaderNav";
 import HeaderSearch from "@/components/shared/MainHeader/Top/HeaderSearch";
+import HeaderUser from "@/components/shared/MainHeader/Top/HeaderUser";
 import Link from "next/link";
 import styled from "styled-components";
 
@@ -16,6 +17,7 @@ export default function MainHeaderTop() {
         </Side>
         <Side id="right">
           <HeaderSearch />
+          <HeaderUser />
         </Side>
       </Wrapper>
     </Container>

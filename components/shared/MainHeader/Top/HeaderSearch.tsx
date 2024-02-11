@@ -1,6 +1,18 @@
+import { useRouter } from "next/navigation";
+import { KeyboardEvent } from "react";
 import styled from "styled-components";
 
 function HeaderSearch() {
+  const router = useRouter();
+
+  const goToSearchResult = () => {
+    router.push("/productions");
+  };
+
+  const handlePressEnter = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") goToSearchResult();
+  };
+
   return (
     <Container>
       <InputArea>
@@ -9,6 +21,7 @@ function HeaderSearch() {
           placeholder="통합검색"
           autoComplete="off"
           aria-autocomplete="list"
+          onKeyPress={handlePressEnter}
         />
       </InputArea>
     </Container>

@@ -7,7 +7,7 @@ const HeaderUser = () => {
       <MenuItem href="/cart">장바구니</MenuItem>
       <MenuItem
         href={`/users/sign_in?redirect_to=${encodeURIComponent(
-          location.origin
+          window.location.origin
         )}`}
       >
         로그인

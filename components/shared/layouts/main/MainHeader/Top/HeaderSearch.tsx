@@ -1,13 +1,10 @@
-import { useRouter } from "next/navigation";
+import useGlobalSearch from "@/hooks/useGlobalSearch";
 import { KeyboardEvent } from "react";
 import styled from "styled-components";
 
 function HeaderSearch() {
-  const router = useRouter();
-
-  const goToSearchResult = () => {
-    router.push("/productions");
-  };
+  const { inputQuery, handleChangeSearchInput, goToSearchResult } =
+    useGlobalSearch();
 
   const handlePressEnter = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") goToSearchResult();
@@ -21,6 +18,8 @@ function HeaderSearch() {
           placeholder="통합검색"
           autoComplete="off"
           aria-autocomplete="list"
+          value={inputQuery}
+          onChange={handleChangeSearchInput}
           onKeyPress={handlePressEnter}
         />
       </InputArea>
@@ -45,7 +44,7 @@ const Input = styled.input`
   height: 100%;
   padding: 0 14px 0 40px;
   border: 1px solid var(--gray-80);
-  color: var(--gray-300);
+  color: var(--gray-400);
   font-size: 16px;
   border-radius: 4px;
   box-sizing: border-box;

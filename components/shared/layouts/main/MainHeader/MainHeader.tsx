@@ -1,6 +1,6 @@
 "use client";
 
-import MainHeaderTop from "@/components/shared/MainHeader/Top/MainHeaderTop";
+import MainHeaderTop from "@/components/shared/layouts/main/MainHeader/Top/MainHeaderTop";
 import styled from "styled-components";
 
 const MainHeader = () => {

@@ -55,7 +55,7 @@ const NavItem = styled(Link)<NavProps>`
   padding: 21px 5px 15px;
   font-size: 18px;
   color: ${({ isActive }) =>
-    isActive ? "var(--blue-400)" : "var(--gray-300)"};
+    isActive ? "var(--blue-400)" : "var(--gray-400)"};
   font-weight: bold;
 
   :hover {

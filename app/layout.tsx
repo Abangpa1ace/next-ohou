@@ -1,4 +1,4 @@
-import MainHeader from "@/components/shared/MainHeader/MainHeader";
+import MainLayout from "@/components/shared/layouts/main/MainLayout";
 import StyledComponentsRegistry from "@/lib/RootStyleRegistry";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
@@ -26,9 +26,8 @@ export default function RootLayout({
       </head>
       <body className={inter.className}>
         <StyledComponentsRegistry>
-          <MainHeader />
+          <MainLayout>{children}</MainLayout>
         </StyledComponentsRegistry>
-        {children}
       </body>
     </html>
   );

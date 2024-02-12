@@ -1,7 +1,7 @@
 import MainLogo from "@/components/shared/icons/MainLogo";
-import HeaderNav from "@/components/shared/MainHeader/Top/HeaderNav";
-import HeaderSearch from "@/components/shared/MainHeader/Top/HeaderSearch";
-import HeaderUser from "@/components/shared/MainHeader/Top/HeaderUser";
+import HeaderNav from "@/components/shared/layouts/main/MainHeader/Top/HeaderNav";
+import HeaderSearch from "@/components/shared/layouts/main/MainHeader/Top/HeaderSearch";
+import HeaderUser from "@/components/shared/layouts/main/MainHeader/Top/HeaderUser";
 import Link from "next/link";
 import styled from "styled-components";
 
@@ -36,7 +36,7 @@ const Wrapper = styled.div`
   max-width: var(--w);
   height: 80px;
   margin: 0 auto;
-  padding: 10px 60px;
+  padding: 10px var(--p-side);
 `;
 
 const Side = styled.div`

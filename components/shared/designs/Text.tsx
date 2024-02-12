@@ -4,20 +4,20 @@ interface TextProps {
   ellipsis?: number;
 }
 
-const Text = styled.p<TextProps>`
-  ${({ ellipsis }) => {
-    switch (ellipsis) {
-      case 1:
-        return css`
-          white-space: nowrap;
-          overflow: hidden;
-          text-overflow: ellipsis;
-        `;
-      case 0:
-      case undefined:
-        return null;
-      default:
-        return css``;
-    }
+export const Text = styled.span<TextProps>`
+  ${({ ellipsis = 1 }) => {
+    if (!ellipsis || typeof ellipsis !== "number" || ellipsis <= 0) return null;
+    if (ellipsis === 1)
+      return css`
+        overflow: hidden;
+        text-overflow: ellipsis;
+      `;
+    return css`
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: ${ellipsis};
+      -webkit-box-orient: vertical;
+    `;
   }}
 `;

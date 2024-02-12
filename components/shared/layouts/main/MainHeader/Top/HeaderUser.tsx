@@ -27,7 +27,7 @@ const MenuList = styled.div`
 const MenuItem = styled(Link)`
   font-size: 14px;
   line-height: 18px;
-  color: var(--gray-300);
+  color: var(--gray-400);
   padding: 0 10px;
 
   & + & {

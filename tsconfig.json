@@ -26,6 +26,7 @@
     "strictNullChecks": true
   },
   "include": [
+    "./types/custom.d.ts",
     ".next/types/**/*.d.ts",
     "next-env.d.ts",
     "**/*.ts",

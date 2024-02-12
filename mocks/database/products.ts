@@ -1,10 +1,6 @@
-import ProductCard from "@/components/productions/ProductCard/ProductCard";
-import { Text } from "@/components/shared/designs/Text";
 import { ProductItem } from "@/types/production";
-import { Children } from "react";
-import styled from "styled-components";
 
-const MOCK_DATA: ProductItem[] = [
+export const products: ProductItem[] = [
   {
     id: 1,
     image: "https://i.ytimg.com/vi/ym4ZdDuQt74/maxresdefault.jpg",
@@ -52,47 +48,32 @@ const MOCK_DATA: ProductItem[] = [
       { category: "specialPrice", label: "특가" },
     ],
   },
+  {
+    id: 4,
+    image: "https://cdn.thetitlenews.net/news/photo/202307/1531_3014_1111.png",
+    brand: "여자아이들",
+    title:
+      "북유럽 플로어 스탠드 조명 장스탠드 LED 거실등 인테리어 무드등 2color",
+    price: 29500,
+    discountRate: 51,
+    review: {
+      point: 4.5,
+      count: 2629,
+    },
+    tags: [{ category: "freeDelivery", label: "무료배송" }],
+  },
+  {
+    id: 5,
+    image:
+      "https://image.news1.kr/system/photos/2020/1/4/3994216/article.jpg/dims/optimize",
+    brand: "트와이스",
+    title: "LERSTA 플로어 장스탠드 (안전포장)",
+    price: 32900,
+    discountRate: 16,
+    review: {
+      point: 4.3,
+      count: 240,
+    },
+    tags: [{ category: "freeDelivery", label: "무료배송" }],
+  },
 ];
-
-export default function ResultProductList() {
-  const res = (async () => fetch("/products"))();
-  console.log("res", res);
-
-  return (
-    <div>
-      <TitleSection>
-        <Title>전체 48,125개</Title>
-      </TitleSection>
-      <ProductCardList>
-        {Children.toArray(
-          Array.from({ length: 6 }, () => MOCK_DATA)
-            .flat()
-            .map((product) => <ProductCard product={product} />)
-        )}
-      </ProductCardList>
-    </div>
-  );
-}
-
-const TitleSection = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 30px;
-  margin: 20px 0 4px;
-`;
-
-const Title = styled(Text)`
-  color: var(--gray-300);
-  font-size: 14px;
-`;
-
-const ProductCardList = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px 20px;
-
-  > * {
-    width: calc((100% - 60px) / 4);
-  }
-`;

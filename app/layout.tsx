@@ -1,5 +1,6 @@
 import MainLayout from "@/components/shared/layouts/main/MainLayout";
 import StyledComponentsRegistry from "@/lib/RootStyleRegistry";
+import MswProviders from "@/providers/MswProvider";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
@@ -26,7 +27,9 @@ export default function RootLayout({
       </head>
       <body className={inter.className}>
         <StyledComponentsRegistry>
-          <MainLayout>{children}</MainLayout>
+          <MswProviders>
+            <MainLayout>{children}</MainLayout>
+          </MswProviders>
         </StyledComponentsRegistry>
       </body>
     </html>

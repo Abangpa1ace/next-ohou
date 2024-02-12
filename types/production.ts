@@ -21,3 +21,7 @@ export type ProductItem = {
     isDepartureToday?: boolean;
   };
 };
+
+export interface RequestGetProducts {
+  query?: string;
+}

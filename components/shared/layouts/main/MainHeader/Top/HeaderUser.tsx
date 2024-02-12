@@ -5,11 +5,7 @@ const HeaderUser = () => {
   return (
     <MenuList>
       <MenuItem href="/cart">장바구니</MenuItem>
-      <MenuItem
-        href={`/users/sign_in?redirect_to=${encodeURIComponent(
-          window.location.origin
-        )}`}
-      >
+      <MenuItem href={`/users/sign_in?redirect_to=${encodeURIComponent("/")}`}>
         로그인
       </MenuItem>
       <MenuItem href="/normal_users/new">회원가입</MenuItem>

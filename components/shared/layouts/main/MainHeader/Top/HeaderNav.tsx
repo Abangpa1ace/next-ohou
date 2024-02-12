@@ -28,7 +28,7 @@ function HeaderNav() {
     <Wrapper>
       {Children.toArray(
         NavList.map((navItem) => (
-          <NavItem href={navItem.link} isActive={pathname === navItem.link}>
+          <NavItem href={navItem.link} active={`${pathname === navItem.link}`}>
             {navItem.label}
           </NavItem>
         ))
@@ -47,15 +47,15 @@ const Wrapper = styled.nav`
 `;
 
 interface NavProps extends LinkProps {
-  isActive: boolean;
+  active: "true" | "false";
 }
 
 const NavItem = styled(Link)<NavProps>`
   margin: 0 10px;
   padding: 21px 5px 15px;
   font-size: 18px;
-  color: ${({ isActive }) =>
-    isActive ? "var(--blue-400)" : "var(--gray-400)"};
+  color: ${({ active }) =>
+    active === "true" ? "var(--blue-400)" : "var(--gray-400)"};
   font-weight: bold;
 
   :hover {

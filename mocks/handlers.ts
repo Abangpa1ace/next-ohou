@@ -1,9 +1,21 @@
 import { products } from "@/mocks/database/products";
 import { rest } from "msw";
+import qs from "query-string";
 
 const handlers = [
   rest.get("/products", (req, res, ctx) => {
-    return res(ctx.status(200), ctx.json({ data: products, request: req }));
+    const {
+      query: { query },
+    } = qs.parseUrl(`${req.url}`);
+
+    return res(
+      ctx.status(200),
+      ctx.json(
+        typeof query === "string"
+          ? products.filter((p) => p.title.includes(query))
+          : products
+      )
+    );
   }),
 ];
 

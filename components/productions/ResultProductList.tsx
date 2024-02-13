@@ -2,7 +2,7 @@ import ProductCard from "@/components/productions/ProductCard/ProductCard";
 import { Text } from "@/components/shared/designs/Text";
 import useGlobalSearch from "@/hooks/useGlobalSearch";
 import { ProductItem } from "@/types/production";
-import { Children } from "react";
+import { Children, useEffect, useState } from "react";
 import styled from "styled-components";
 
 const MOCK_DATA: ProductItem[] = [
@@ -57,8 +57,16 @@ const MOCK_DATA: ProductItem[] = [
 
 export default function ResultProductList() {
   const { currentQuery } = useGlobalSearch();
-  const res = (async () => fetch(`/products?query=${currentQuery}`))();
-  console.log("res", res);
+  const [products, setProducts] = useState<ProductItem[]>([]);
+
+  useEffect(() => {
+    (async () => {
+      const res = await fetch(`/products?query=${currentQuery}`).then((res) =>
+        res.json()
+      );
+      setProducts(res);
+    })();
+  }, [currentQuery]);
 
   return (
     <div>
@@ -67,9 +75,7 @@ export default function ResultProductList() {
       </TitleSection>
       <ProductCardList>
         {Children.toArray(
-          Array.from({ length: 6 }, () => MOCK_DATA)
-            .flat()
-            .map((product) => <ProductCard product={product} />)
+          products.map((product) => <ProductCard product={product} />)
         )}
       </ProductCardList>
     </div>

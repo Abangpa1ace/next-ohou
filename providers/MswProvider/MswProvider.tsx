@@ -1,4 +1,3 @@
-import { isServer } from "@/constants";
 import MswClientProviders from "@/providers/MswProvider/MswClientProvider";
 import { PropsWithChildren } from "react";
 
@@ -8,11 +7,7 @@ import { PropsWithChildren } from "react";
 })();
 
 const MswProviders = ({ children }: PropsWithChildren) => {
-  return isServer ? (
-    <>{children}</>
-  ) : (
-    <MswClientProviders>{children}</MswClientProviders>
-  );
+  return <MswClientProviders>{children}</MswClientProviders>;
 };
 
 export default MswProviders;

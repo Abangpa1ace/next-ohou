@@ -1,5 +1,6 @@
 import ProductCard from "@/components/productions/ProductCard/ProductCard";
 import { Text } from "@/components/shared/designs/Text";
+import useGlobalSearch from "@/hooks/useGlobalSearch";
 import { ProductItem } from "@/types/production";
 import { Children } from "react";
 import styled from "styled-components";
@@ -55,7 +56,8 @@ const MOCK_DATA: ProductItem[] = [
 ];
 
 export default function ResultProductList() {
-  const res = (async () => fetch("/products"))();
+  const { currentQuery } = useGlobalSearch();
+  const res = (async () => fetch(`/products?query=${currentQuery}`))();
   console.log("res", res);
 
   return (

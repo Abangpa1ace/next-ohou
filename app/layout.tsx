@@ -1,6 +1,6 @@
 import MainLayout from "@/components/shared/layouts/main/MainLayout";
 import StyledComponentsRegistry from "@/lib/RootStyleRegistry";
-import MswProviders from "@/providers/MswProvider";
+import MswProviders from "@/providers/MswProvider/MswProvider";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";

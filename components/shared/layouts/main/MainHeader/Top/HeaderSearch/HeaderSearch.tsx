@@ -1,3 +1,4 @@
+import HeaderSearchHistory from "@/components/shared/layouts/main/MainHeader/Top/HeaderSearch/HeaderSearchHistory/HeaderSearchHistory";
 import useGlobalSearch from "@/hooks/useGlobalSearch";
 import { KeyboardEvent } from "react";
 import styled from "styled-components";
@@ -23,6 +24,7 @@ function HeaderSearch() {
           onKeyPress={handlePressEnter}
         />
       </InputArea>
+      <HeaderSearchHistory />
     </Container>
   );
 }
@@ -30,6 +32,7 @@ function HeaderSearch() {
 export default HeaderSearch;
 
 const Container = styled.div`
+  position: relative;
   width: calc(100% - 196px);
 `;
 
@@ -41,17 +44,20 @@ const InputArea = styled.div`
 `;
 
 const Input = styled.input`
+  width: 100%;
   height: 100%;
   padding: 0 14px 0 40px;
-  border: 1px solid var(--gray-80);
+  border: 1px solid var(--gray-70);
   color: var(--gray-400);
   font-size: 16px;
   border-radius: 4px;
   box-sizing: border-box;
+  outline: none;
 
-  :focus,
-  :active {
-    border: 1px solid var(--blue-400) !important;
+  &:focus,
+  &:focus-visible,
+  &:active {
+    border: 1px solid var(--blue-400);
   }
 `;
 

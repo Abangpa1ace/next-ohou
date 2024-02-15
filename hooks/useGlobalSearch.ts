@@ -8,7 +8,7 @@ const useGlobalSearch = () => {
   const searchParams = useSearchParams();
   const currentQuery = searchParams.get(SEARCH_QUERY_KEY);
   const { inputValue: inputQuery, handleChangeInput: handleChangeSearchInput } =
-    useInput();
+    useInput({ defaultValue: currentQuery || "" });
 
   const goToSearchResult = () => {
     if (inputQuery === currentQuery) return;

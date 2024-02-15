@@ -107,7 +107,7 @@ const Review = styled(Text)`
   display: flex;
   align-items: center;
   margin-top: 3px;
-  color: var(--gray-90);
+  color: var(--gray-80);
   font-size: 12px;
   line-height: 16px;
   font-weight: 700;

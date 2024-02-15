@@ -1,6 +1,6 @@
 import MainLogo from "@/components/shared/icons/MainLogo";
 import HeaderNav from "@/components/shared/layouts/main/MainHeader/Top/HeaderNav";
-import HeaderSearch from "@/components/shared/layouts/main/MainHeader/Top/HeaderSearch";
+import HeaderSearch from "@/components/shared/layouts/main/MainHeader/Top/HeaderSearch/HeaderSearch";
 import HeaderUser from "@/components/shared/layouts/main/MainHeader/Top/HeaderUser";
 import Link from "next/link";
 import styled from "styled-components";

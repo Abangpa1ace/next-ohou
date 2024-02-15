@@ -71,7 +71,7 @@ export default function ResultProductList() {
   return (
     <div>
       <TitleSection>
-        <Title>전체 48,125개</Title>
+        <Title>전체 {products.length}개</Title>
       </TitleSection>
       <ProductCardList>
         {Children.toArray(

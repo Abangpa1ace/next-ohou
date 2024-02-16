@@ -1,21 +1,32 @@
-import { CookieKey } from "@/types/shared/cookie";
-import { ResponseCookies } from "next/dist/compiled/@edge-runtime/cookies";
-import { cookies } from "next/headers";
+import { CookieKey, CookieValue } from "@/types/shared/cookie";
+import {
+  deleteCookie as _deleteCookie,
+  getCookie as _getCookie,
+  getCookies as _getCookies,
+  setCookie as _setCookie,
+} from "cookies-next";
+import { OptionsType } from "cookies-next/lib/types";
 
 const useCookies = () => {
-  const cookieStore = cookies();
-
-  const getCookie = (key: CookieKey) => cookieStore.get(key);
-
-  const setCookie = (
+  const getCookie = <V>(
     key: CookieKey,
-    value,
-    options: Partial<ResponseCookies> = {}
-  ) => cookieStore.set(key, value, options);
+    options: OptionsType = {}
+  ): CookieValue<V>["value"] => {
+    const cookieData = _getCookie(key, options);
+    return cookieData ? JSON.parse(cookieData).value : undefined;
+  };
+
+  const setCookie = (key: CookieKey, value, options: OptionsType = {}) =>
+    _setCookie(key, JSON.stringify({ type: typeof value, value }), options);
+
+  const deleteCookie = (key: CookieKey, options: OptionsType = {}) =>
+    _deleteCookie(key, options);
 
   return {
     getCookie,
-    getAllCookie: cookieStore.getAll,
+    getCookies: _getCookies,
+    setCookie,
+    deleteCookie,
   };
 };
 

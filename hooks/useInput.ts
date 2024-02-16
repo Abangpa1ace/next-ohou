@@ -1,7 +1,7 @@
-import { ChangeEvent, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 interface Options {
-  defaultValue?: string;
+  defaultValue?: string | null;
 }
 
 const useInput = ({ defaultValue }: Options = {}) => {
@@ -11,8 +11,8 @@ const useInput = ({ defaultValue }: Options = {}) => {
     if (defaultValue) setInputValue(defaultValue);
   }, []);
 
-  const handleChangeInput = (e: ChangeEvent<HTMLInputElement>) => {
-    setInputValue(e.target.value);
+  const handleChangeInput = (newValue: string) => {
+    setInputValue(newValue);
   };
 
   return { inputValue, handleChangeInput };

@@ -1,5 +1,6 @@
 import HeaderSearchHistory from "@/components/shared/layouts/main/MainHeader/Top/HeaderSearch/HeaderSearchHistory/HeaderSearchHistory";
 import useGlobalSearch from "@/hooks/useGlobalSearch";
+import { IcoCloseCircle } from "components/shared/icons";
 import { KeyboardEvent } from "react";
 import styled from "styled-components";
 
@@ -20,9 +21,10 @@ function HeaderSearch() {
           autoComplete="off"
           aria-autocomplete="list"
           value={inputQuery}
-          onChange={handleChangeSearchInput}
+          onChange={(e) => handleChangeSearchInput(e.target.value)}
           onKeyPress={handlePressEnter}
         />
+        <CloseButton onClick={() => handleChangeSearchInput("")} />
       </InputArea>
       <HeaderSearchHistory />
     </Container>
@@ -73,4 +75,16 @@ const SearchIcon = styled.i`
     width: 100%;
     height: 100%;
   }
+`;
+
+const CloseButton = styled(IcoCloseCircle)`
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 24px;
+  path {
+    fill: var(--gray-90);
+  }
+  cursor: pointer;
 `;

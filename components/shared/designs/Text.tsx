@@ -16,7 +16,7 @@ const PropToCssVar = (color: ColorVariable) => {
 
 export const Text = styled.span<TextProps>`
   color: ${({ color = "black" }) => PropToCssVar(color)};
-  // ellipsis :
+  // ellipsis
   ${({ ellipsis = 1 }) => {
     if (!ellipsis || typeof ellipsis !== "number" || ellipsis <= 0) return null;
     if (ellipsis === 1)

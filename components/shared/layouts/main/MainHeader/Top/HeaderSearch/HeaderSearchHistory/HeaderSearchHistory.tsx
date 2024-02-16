@@ -1,12 +1,27 @@
 import { Text } from "@/components/shared/designs/Text";
+import { IcoClose } from "@/components/shared/icons";
+import useGlobalSearch from "@/hooks/useGlobalSearch";
+import { Children } from "react";
 import styled from "styled-components";
 
 function HeaderSearchHistory() {
+  const { searchHistory } = useGlobalSearch();
+  console.log(searchHistory);
   return (
     <Container>
       <TitleWrapper>
         <Title color="gray90">최근 검색어</Title>
       </TitleWrapper>
+      <ul>
+        {Children.toArray(
+          searchHistory?.map((historyItem) => (
+            <HistoryItem>
+              <HistoryLabel color="gray400">{historyItem.value}</HistoryLabel>
+              <HistoryRemoveButton />
+            </HistoryItem>
+          ))
+        )}
+      </ul>
     </Container>
   );
 }
@@ -37,4 +52,24 @@ const TitleWrapper = styled.header`
 
 const Title = styled(Text)`
   font-size: 13px;
+`;
+
+const HistoryItem = styled.li`
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+  height: 48px;
+  padding: 8px;
+
+  &:hover {
+    background-color: var(--gray-60);
+  }
+`;
+
+const HistoryLabel = styled(Text)`
+  font-size: 14px;
+`;
+
+const HistoryRemoveButton = styled(IcoClose)`
+  width: 12px;
 `;

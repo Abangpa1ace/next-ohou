@@ -1,32 +1,56 @@
 import HeaderSearchHistory from "@/components/shared/layouts/main/MainHeader/Top/HeaderSearch/HeaderSearchHistory/HeaderSearchHistory";
+import useClickOutside from "@/hooks/useClickOutside";
 import useGlobalSearch from "@/hooks/useGlobalSearch";
 import { IcoCloseCircle } from "components/shared/icons";
-import { KeyboardEvent } from "react";
+import { KeyboardEvent, useRef, useState } from "react";
 import styled from "styled-components";
 
 function HeaderSearch() {
-  const { inputQuery, handleChangeSearchInput, goToSearchResult } =
+  const { inputQuery, handleChangeSearchInput, routeSearchResult } =
     useGlobalSearch();
+  const { ref } = useClickOutside(() => setIsShowHistory(false));
+  const inputRef = useRef<HTMLInputElement>(null);
+  const [isShowHistory, setIsShowHistory] = useState<boolean>(false);
 
-  const handlePressEnter = (e: KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter") goToSearchResult();
+  const goToSearchResult = () => {
+    setIsShowHistory(false);
+    inputRef.current?.blur();
+    routeSearchResult();
+  };
+
+  const handleKeyPress = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      goToSearchResult();
+    }
+  };
+
+  const handleClickEraseInput = () => {
+    handleChangeSearchInput("");
+    setIsShowHistory(false);
   };
 
   return (
-    <Container>
+    <Container ref={ref}>
       <InputArea>
-        <SearchIcon className="fa fa-search" />
+        <SearchIcon className="fa fa-search" onClick={goToSearchResult} />
         <Input
+          ref={inputRef}
           placeholder="통합검색"
           autoComplete="off"
           aria-autocomplete="list"
           value={inputQuery}
+          onFocus={() => {
+            console.log("onFocuse");
+            setIsShowHistory(true);
+          }}
           onChange={(e) => handleChangeSearchInput(e.target.value)}
-          onKeyPress={handlePressEnter}
+          onKeyPress={handleKeyPress}
         />
-        <CloseButton onClick={() => handleChangeSearchInput("")} />
+        <EraseButton onClick={handleClickEraseInput} />
       </InputArea>
-      <HeaderSearchHistory />
+      {isShowHistory && (
+        <HeaderSearchHistory setIsShowHistory={setIsShowHistory} />
+      )}
     </Container>
   );
 }
@@ -77,7 +101,7 @@ const SearchIcon = styled.i`
   }
 `;
 
-const CloseButton = styled(IcoCloseCircle)`
+const EraseButton = styled(IcoCloseCircle)`
   position: absolute;
   right: 14px;
   top: 50%;

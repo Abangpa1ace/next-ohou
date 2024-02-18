@@ -4,20 +4,37 @@ import useGlobalSearch from "@/hooks/useGlobalSearch";
 import { Children } from "react";
 import styled from "styled-components";
 
-function HeaderSearchHistory() {
-  const { searchHistory } = useGlobalSearch();
-  console.log(searchHistory);
+interface Props {
+  setIsShowHistory: (isShow: boolean) => void;
+}
+
+function HeaderSearchHistory({ setIsShowHistory }: Props) {
+  const { searchHistories, removeSearchHistory, removeAllSearchHistories } =
+    useGlobalSearch();
+
+  const handleClickRemoveAll = () => {
+    removeAllSearchHistories();
+    setIsShowHistory(false);
+  };
+
+  if (!searchHistories?.length) return null;
+
   return (
     <Container>
       <TitleWrapper>
         <Title color="gray90">최근 검색어</Title>
+        <HistoryRemoveAllButton color="gray90" onClick={handleClickRemoveAll}>
+          전체 삭제
+        </HistoryRemoveAllButton>
       </TitleWrapper>
       <ul>
         {Children.toArray(
-          searchHistory?.map((historyItem) => (
+          searchHistories?.map((historyItem) => (
             <HistoryItem>
               <HistoryLabel color="gray400">{historyItem.value}</HistoryLabel>
-              <HistoryRemoveButton />
+              <HistoryRemoveButton
+                onClick={() => removeSearchHistory(historyItem)}
+              />
             </HistoryItem>
           ))
         )}
@@ -54,10 +71,19 @@ const Title = styled(Text)`
   font-size: 13px;
 `;
 
+const HistoryRemoveAllButton = styled(Text)`
+  font-size: 12px;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.8;
+  }
+`;
+
 const HistoryItem = styled.li`
   display: flex;
   justify-content: space-between;
-  align-content: center;
+  align-items: center;
   height: 48px;
   padding: 8px;
 
@@ -71,5 +97,10 @@ const HistoryLabel = styled(Text)`
 `;
 
 const HistoryRemoveButton = styled(IcoClose)`
-  width: 12px;
+  width: 16px;
+  cursor: pointer;
+
+  path {
+    fill: var(--gray-90);
+  }
 `;

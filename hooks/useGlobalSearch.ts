@@ -20,20 +20,38 @@ const useGlobalSearch = () => {
   );
 
   const updateSearchHistories = (histories: SearchHistoryItem[]) => {
-    setCookie(CookieKey.SEARCH_HISTORIES, histories);
     setSearchHistories(histories);
+    setCookie(CookieKey.SEARCH_HISTORIES, histories);
   };
 
-  const goToSearchResult = () => {
-    if (inputQuery === currentQuery) return;
+  const addSearchHistory = (history: SearchHistoryItem) => {
+    const i = searchHistories.findIndex((h) => h.value === history.value);
+    const addedHistories = [
+      history,
+      ...(i === -1
+        ? searchHistories
+        : searchHistories.filter((h) => h.value !== history.value)),
+    ];
 
-    updateSearchHistories([
-      {
-        category: "input",
-        value: inputQuery,
-      },
-      ...searchHistories,
-    ]);
+    updateSearchHistories(addedHistories);
+  };
+
+  const removeSearchHistory = (history: SearchHistoryItem) => {
+    const removedHistories = searchHistories.filter(
+      (h) => h.value !== history.value
+    );
+    updateSearchHistories(removedHistories);
+  };
+
+  const removeAllSearchHistories = () => updateSearchHistories([]);
+
+  const routeSearchResult = () => {
+    if (!inputQuery || inputQuery === currentQuery) return;
+
+    addSearchHistory({
+      category: "input",
+      value: inputQuery,
+    });
     router.push(`/productions?${SEARCH_QUERY_KEY}=${inputQuery}`);
   };
 
@@ -41,9 +59,11 @@ const useGlobalSearch = () => {
     currentQuery,
     inputQuery,
     searchHistories,
-    updateSearchHistories,
     handleChangeSearchInput,
-    goToSearchResult,
+    addSearchHistory,
+    removeSearchHistory,
+    removeAllSearchHistories,
+    routeSearchResult,
   };
 };
 

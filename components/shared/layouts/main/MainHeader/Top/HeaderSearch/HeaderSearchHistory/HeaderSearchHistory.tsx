@@ -9,8 +9,12 @@ interface Props {
 }
 
 function HeaderSearchHistory({ setIsShowHistory }: Props) {
-  const { searchHistories, removeSearchHistory, removeAllSearchHistories } =
-    useGlobalSearch();
+  const {
+    searchHistories,
+    removeSearchHistory,
+    removeAllSearchHistories,
+    routeToResultByValue,
+  } = useGlobalSearch();
 
   const handleClickRemoveAll = () => {
     removeAllSearchHistories();
@@ -30,11 +34,18 @@ function HeaderSearchHistory({ setIsShowHistory }: Props) {
       <ul>
         {Children.toArray(
           searchHistories?.map((historyItem) => (
-            <HistoryItem>
+            <HistoryItem
+              onClick={() => routeToResultByValue(historyItem.value)}
+            >
               <HistoryLabel color="gray400">{historyItem.value}</HistoryLabel>
               <HistoryRemoveButton
-                onClick={() => removeSearchHistory(historyItem)}
-              />
+                onClick={(e) => {
+                  e.stopPropagation();
+                  removeSearchHistory(historyItem);
+                }}
+              >
+                <IcoClose />
+              </HistoryRemoveButton>
             </HistoryItem>
           ))
         )}
@@ -86,6 +97,7 @@ const HistoryItem = styled.li`
   align-items: center;
   height: 48px;
   padding: 8px;
+  cursor: pointer;
 
   &:hover {
     background-color: var(--gray-60);
@@ -96,9 +108,11 @@ const HistoryLabel = styled(Text)`
   font-size: 14px;
 `;
 
-const HistoryRemoveButton = styled(IcoClose)`
+const HistoryRemoveButton = styled.button`
   width: 16px;
+  height: 16px;
   cursor: pointer;
+  z-index: 1;
 
   path {
     fill: var(--gray-90);

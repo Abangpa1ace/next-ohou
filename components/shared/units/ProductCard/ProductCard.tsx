@@ -1,6 +1,6 @@
-import ProductCardTags from "@/components/productions/ProductCard/ProductCardTags";
 import { Text } from "@/components/shared/designs/Text";
 import { IcoStar } from "@/components/shared/icons";
+import ProductCardTags from "@/components/shared/units/ProductCard/ProductCardTags";
 import { ProductItem } from "@/types/production";
 import { toLocalePrice } from "@/utils";
 import Image from "next/image";
@@ -37,7 +37,9 @@ export default function ProductCard({ product }: Props) {
           {toLocalePrice(price, "원")}
         </Price>
         <Review>
-          <LikeStar />
+          <LikeStar>
+            <IcoStar />
+          </LikeStar>
           <ReviewPoint>{review.point}</ReviewPoint>
           {`리뷰 ${review.count.toLocaleString()}`}
         </Review>
@@ -113,8 +115,9 @@ const Review = styled(Text)`
   font-weight: 700;
 `;
 
-const LikeStar = styled(IcoStar)`
+const LikeStar = styled.span`
   width: 13px;
+  height: 13px;
   path {
     fill: var(--blue-400);
   }

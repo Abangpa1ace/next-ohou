@@ -45,7 +45,7 @@ const useGlobalSearch = () => {
 
   const removeAllSearchHistories = () => updateSearchHistories([]);
 
-  const routeSearchResult = () => {
+  const routeToResultByInput = () => {
     if (!inputQuery || inputQuery === currentQuery) return;
 
     addSearchHistory({
@@ -53,6 +53,17 @@ const useGlobalSearch = () => {
       value: inputQuery,
     });
     router.push(`/productions?${SEARCH_QUERY_KEY}=${inputQuery}`);
+  };
+
+  const routeToResultByValue = (query: string) => {
+    if (!query || query === currentQuery) return;
+
+    handleChangeSearchInput(query);
+    addSearchHistory({
+      category: "input",
+      value: query,
+    });
+    router.push(`/productions?${SEARCH_QUERY_KEY}=${query}`);
   };
 
   return {
@@ -63,7 +74,8 @@ const useGlobalSearch = () => {
     addSearchHistory,
     removeSearchHistory,
     removeAllSearchHistories,
-    routeSearchResult,
+    routeToResultByInput,
+    routeToResultByValue,
   };
 };
 

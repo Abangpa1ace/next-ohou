@@ -1,11 +1,9 @@
 import MainLayout from "@/components/shared/layouts/main/MainLayout";
 import StyledComponentsRegistry from "@/lib/RootStyleRegistry";
 import MswProviders from "@/providers/MswProvider/MswProvider";
+import QueryProvider from "@/providers/QueryProvider";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import "./globals.css";
-
-const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -25,11 +23,13 @@ export default function RootLayout({
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
         />
       </head>
-      <body className={inter.className}>
+      <body>
         <StyledComponentsRegistry>
-          <MswProviders>
-            <MainLayout>{children}</MainLayout>
-          </MswProviders>
+          <QueryProvider>
+            <MswProviders>
+              <MainLayout>{children}</MainLayout>
+            </MswProviders>
+          </QueryProvider>
         </StyledComponentsRegistry>
       </body>
     </html>

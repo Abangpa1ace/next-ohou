@@ -3,7 +3,7 @@
 import styled from "styled-components";
 
 export default function Home() {
-  return <Container>Home</Container>;
+  return <Container>home</Container>;
 }
 
 const Container = styled.main`

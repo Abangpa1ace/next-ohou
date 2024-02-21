@@ -2,6 +2,8 @@ lockfileVersion: 5.3
 
 specifiers:
   '@svgr/webpack': ^8.1.0
+  '@tanstack/react-query': ^5.22.2
+  '@tanstack/react-query-devtools': ^5.23.0
   '@types/node': ^20
   '@types/react': ^18
   '@types/react-dom': ^18
@@ -18,6 +20,7 @@ specifiers:
   zustand: ^4.5.0
 
 dependencies:
+  '@tanstack/react-query': 5.22.2_react@18.2.0
   cookies-next: 4.1.1
   next: 14.1.0_react-dom@18.2.0+react@18.2.0
   query-string: 8.2.0
@@ -28,6 +31,7 @@ dependencies:
 
 devDependencies:
   '@svgr/webpack': 8.1.0_typescript@5.3.3
+  '@tanstack/react-query-devtools': 5.23.0_4fa785c1e0a3232edbe99a1c8ebd9d59
   '@types/node': 20.11.10
   '@types/react': 18.2.48
   '@types/react-dom': 18.2.18
@@ -1746,6 +1750,34 @@ packages:
     resolution: {integrity: sha512-E4KcWTpoLHqwPHLxidpOqQbcrZVgi0rsmmZXUle1jXmJfuIf/UWpczUJ7MZZ5tlxytgJXyp0w4PGkkeLiuIdZw==}
     dependencies:
       tslib: 2.6.2
+    dev: false
+
+  /@tanstack/query-core/5.22.2:
+    resolution: {integrity: sha512-z3PwKFUFACMUqe1eyesCIKg3Jv1mysSrYfrEW5ww5DCDUD4zlpTKBvUDaEjsfZzL3ULrFLDM9yVUxI/fega1Qg==}
+    dev: false
+
+  /@tanstack/query-devtools/5.23.0:
+    resolution: {integrity: sha512-e0NpY8D+8km9fEZrfPNkb69nY5vQsH4Cp8YzaRJQEUXO0hANUOroGsNWSI3mLL7H/8y9GXD3N5I3IoE9z6lulQ==}
+    dev: true
+
+  /@tanstack/react-query-devtools/5.23.0_4fa785c1e0a3232edbe99a1c8ebd9d59:
+    resolution: {integrity: sha512-oiT74q4rYS1aemEP/PoxZfhcLX7M0rsx47Ed36eHzGWSFNGvwfgg8ryMO8Bha8dqtHpdGsWftY5ta7dPoki4hw==}
+    peerDependencies:
+      '@tanstack/react-query': ^5.22.2
+      react: ^18.0.0
+    dependencies:
+      '@tanstack/query-devtools': 5.23.0
+      '@tanstack/react-query': 5.22.2_react@18.2.0
+      react: 18.2.0
+    dev: true
+
+  /@tanstack/react-query/5.22.2_react@18.2.0:
+    resolution: {integrity: sha512-TaxJDRzJ8/NWRT4lY2jguKCrNI6MRN+67dELzPjNUlvqzTxGANlMp68l7aC7hG8Bd1uHNxHl7ihv7MT50i/43A==}
+    peerDependencies:
+      react: ^18.0.0
+    dependencies:
+      '@tanstack/query-core': 5.22.2
+      react: 18.2.0
     dev: false
 
   /@trysound/sax/0.2.0:

@@ -1,12 +1,13 @@
+import { IcoCloseCircle } from "@/components/shared/icons";
 import HeaderSearchHistory from "@/components/shared/layouts/main/MainHeader/Top/HeaderSearch/HeaderSearchHistory/HeaderSearchHistory";
 import useClickOutside from "@/hooks/useClickOutside";
 import useGlobalSearch from "@/hooks/useGlobalSearch";
-import { IcoCloseCircle } from "components/shared/icons";
+
 import { KeyboardEvent, useRef, useState } from "react";
 import styled from "styled-components";
 
 function HeaderSearch() {
-  const { inputQuery, handleChangeSearchInput, routeSearchResult } =
+  const { inputQuery, handleChangeSearchInput, routeToResultByInput } =
     useGlobalSearch();
   const { ref } = useClickOutside(() => setIsShowHistory(false));
   const inputRef = useRef<HTMLInputElement>(null);
@@ -15,10 +16,10 @@ function HeaderSearch() {
   const goToSearchResult = () => {
     setIsShowHistory(false);
     inputRef.current?.blur();
-    routeSearchResult();
+    routeToResultByInput();
   };
 
-  const handleKeyPress = (e: KeyboardEvent<HTMLInputElement>) => {
+  const handleKeyUp = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
       goToSearchResult();
     }
@@ -44,9 +45,11 @@ function HeaderSearch() {
             setIsShowHistory(true);
           }}
           onChange={(e) => handleChangeSearchInput(e.target.value)}
-          onKeyPress={handleKeyPress}
+          onKeyUp={handleKeyUp}
         />
-        <EraseButton onClick={handleClickEraseInput} />
+        <EraseButton onClick={handleClickEraseInput}>
+          <IcoCloseCircle />
+        </EraseButton>
       </InputArea>
       {isShowHistory && (
         <HeaderSearchHistory setIsShowHistory={setIsShowHistory} />
@@ -101,7 +104,7 @@ const SearchIcon = styled.i`
   }
 `;
 
-const EraseButton = styled(IcoCloseCircle)`
+const EraseButton = styled.button`
   position: absolute;
   right: 14px;
   top: 50%;

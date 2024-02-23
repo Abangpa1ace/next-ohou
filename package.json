@@ -16,6 +16,7 @@
     "query-string": "^8.2.0",
     "react": "^18",
     "react-dom": "^18",
+    "react-loader-spinner": "^6.1.6",
     "styled-components": "^6.1.8",
     "zustand": "^4.5.0"
   },

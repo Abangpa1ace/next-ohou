@@ -1,31 +1,20 @@
 import { Text } from "@/components/shared/designs/Text";
 import ProductCard from "@/components/shared/units/ProductCard/ProductCard";
-import useGlobalSearch from "@/hooks/useGlobalSearch";
-import { ProductItem } from "@/types/production";
-import { Children, useEffect, useState } from "react";
+import useGetProducts from "@/hooks/apis/useGetProducts";
+import { Children } from "react";
 import styled from "styled-components";
 
 export default function ResultProductList() {
-  const { currentQuery } = useGlobalSearch();
-  const [products, setProducts] = useState<ProductItem[]>([]);
-
-  useEffect(() => {
-    (async () => {
-      const res = await fetch(`/products?query=${currentQuery}`).then((res) =>
-        res.json()
-      );
-      setProducts(res);
-    })();
-  }, [currentQuery]);
+  const { data } = useGetProducts();
 
   return (
     <div>
       <TitleSection>
-        <Title>전체 {products.length}개</Title>
+        <Title>전체 {data.length}개</Title>
       </TitleSection>
       <ProductCardList>
         {Children.toArray(
-          products.map((product) => <ProductCard product={product} />)
+          data.map((product) => <ProductCard product={product} />)
         )}
       </ProductCardList>
     </div>

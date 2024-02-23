@@ -15,6 +15,7 @@ specifiers:
   query-string: ^8.2.0
   react: ^18
   react-dom: ^18
+  react-loader-spinner: ^6.1.6
   styled-components: ^6.1.8
   typescript: ^5
   zustand: ^4.5.0
@@ -26,6 +27,7 @@ dependencies:
   query-string: 8.2.0
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
+  react-loader-spinner: 6.1.6_react-dom@18.2.0+react@18.2.0
   styled-components: 6.1.8_react-dom@18.2.0+react@18.2.0
   zustand: 4.5.0_fa8ffd194b3760959fb917a5eaedfeaf
 
@@ -4129,6 +4131,23 @@ packages:
   /react-is/16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
     dev: true
+
+  /react-is/18.2.0:
+    resolution: {integrity: sha512-xWGDIW6x921xtzPkhiULtthJHoJvBbF3q26fzloPCK0hsvxtPVelvftw3zjbHWSkR2km9Z+4uxbDDK/6Zw9B8w==}
+    dev: false
+
+  /react-loader-spinner/6.1.6_react-dom@18.2.0+react@18.2.0:
+    resolution: {integrity: sha512-x5h1Jcit7Qn03MuKlrWcMG9o12cp9SNDVHVJTNRi9TgtGPKcjKiXkou4NRfLAtXaFB3+Z8yZsVzONmPzhv2ErA==}
+    engines: {node: '>= 12'}
+    peerDependencies:
+      react: ^16.0.0 || ^17.0.0 || ^18.0.0
+      react-dom: ^16.0.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+      react-is: 18.2.0
+      styled-components: 6.1.8_react-dom@18.2.0+react@18.2.0
+    dev: false
 
   /react/18.2.0:
     resolution: {integrity: sha512-/3IjMdb2L9QbBdWiW5e3P2/npwMBaU9mHCSCUzNln0ZCYbcfTsGbTJrU/kGemdH2IWmB2ioZ+zkxtmq6g09fGQ==}

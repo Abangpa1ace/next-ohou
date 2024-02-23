@@ -9,7 +9,7 @@ const useInput = ({ defaultValue }: Options = {}) => {
 
   useEffect(() => {
     if (defaultValue) setInputValue(defaultValue);
-  }, []);
+  }, [defaultValue]);
 
   const handleChangeInput = (newValue: string) => {
     setInputValue(newValue);

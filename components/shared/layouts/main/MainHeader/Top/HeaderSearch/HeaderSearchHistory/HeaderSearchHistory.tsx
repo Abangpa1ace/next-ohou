@@ -1,6 +1,7 @@
 import { Text } from "@/components/shared/designs/Text";
 import { IcoClose } from "@/components/shared/icons";
 import useGlobalSearch from "@/hooks/useGlobalSearch";
+import { SearchHistoryItem } from "@/types/layouts/header";
 import { Children } from "react";
 import styled from "styled-components";
 
@@ -13,12 +14,17 @@ function HeaderSearchHistory({ setIsShowHistory }: Props) {
     searchHistories,
     removeSearchHistory,
     removeAllSearchHistories,
-    routeToResultByValue,
+    routeToResult,
   } = useGlobalSearch();
 
   const handleClickRemoveAll = () => {
     removeAllSearchHistories();
     setIsShowHistory(false);
+  };
+
+  const handleClickHistory = (value: SearchHistoryItem["value"]) => {
+    setIsShowHistory(false);
+    routeToResult(value);
   };
 
   if (!searchHistories?.length) return null;
@@ -34,9 +40,7 @@ function HeaderSearchHistory({ setIsShowHistory }: Props) {
       <ul>
         {Children.toArray(
           searchHistories?.map((historyItem) => (
-            <HistoryItem
-              onClick={() => routeToResultByValue(historyItem.value)}
-            >
+            <HistoryItem onClick={() => handleClickHistory(historyItem.value)}>
               <HistoryLabel color="gray400">{historyItem.value}</HistoryLabel>
               <HistoryRemoveButton
                 onClick={(e) => {

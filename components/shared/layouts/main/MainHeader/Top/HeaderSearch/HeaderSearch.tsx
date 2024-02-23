@@ -2,13 +2,16 @@ import { IcoCloseCircle } from "@/components/shared/icons";
 import HeaderSearchHistory from "@/components/shared/layouts/main/MainHeader/Top/HeaderSearch/HeaderSearchHistory/HeaderSearchHistory";
 import useClickOutside from "@/hooks/useClickOutside";
 import useGlobalSearch from "@/hooks/useGlobalSearch";
+import useInput from "@/hooks/useInput";
 
 import { KeyboardEvent, useRef, useState } from "react";
 import styled from "styled-components";
 
 function HeaderSearch() {
-  const { inputQuery, handleChangeSearchInput, routeToResultByInput } =
-    useGlobalSearch();
+  const { currentQuery, routeToResult } = useGlobalSearch();
+  const { inputValue, handleChangeInput } = useInput({
+    defaultValue: currentQuery,
+  });
   const { ref } = useClickOutside(() => setIsShowHistory(false));
   const inputRef = useRef<HTMLInputElement>(null);
   const [isShowHistory, setIsShowHistory] = useState<boolean>(false);
@@ -16,7 +19,7 @@ function HeaderSearch() {
   const goToSearchResult = () => {
     setIsShowHistory(false);
     inputRef.current?.blur();
-    routeToResultByInput();
+    routeToResult(inputValue);
   };
 
   const handleKeyUp = (e: KeyboardEvent<HTMLInputElement>) => {
@@ -26,7 +29,7 @@ function HeaderSearch() {
   };
 
   const handleClickEraseInput = () => {
-    handleChangeSearchInput("");
+    handleChangeInput("");
     setIsShowHistory(false);
   };
 
@@ -39,12 +42,12 @@ function HeaderSearch() {
           placeholder="통합검색"
           autoComplete="off"
           aria-autocomplete="list"
-          value={inputQuery}
+          value={inputValue}
           onFocus={() => {
             console.log("onFocuse");
             setIsShowHistory(true);
           }}
-          onChange={(e) => handleChangeSearchInput(e.target.value)}
+          onChange={(e) => handleChangeInput(e.target.value)}
           onKeyUp={handleKeyUp}
         />
         <EraseButton onClick={handleClickEraseInput}>

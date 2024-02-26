@@ -1,14 +1,13 @@
 pipeline {
     agent any
             stages {
-            	stage("sonarqube") {
-                    steps{
-                        script{
-                        def scannerHome = tool 'sonarqube-scanner';
-                        withSonarQubeEnv(credentialsId:"SONAR_TOKEN",installationName:'sonarqube') {
-                          echo '${env.SONAR_HOST_URL}'
-                        sh "${scannerHome}/bin/sonar-scanner"
-                    }
+    stage('SonarQube analysis') {
+             steps {
+                 withSonarQubeEnv('SonarQube-server') {
+                     sh 'mvn sonar:sonar'
+                 }
+             }
+         }
                 }
             }
         }

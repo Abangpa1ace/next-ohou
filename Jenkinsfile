@@ -1,18 +1,15 @@
 pipeline {
-    agent any
-            stages {
-    stage('SonarQube analysis') {
-             steps {
-                 withSonarQubeEnv('SonarQube-server') {
-                     sh 'mvn sonar:sonar'
-                 }
-             }
-         
-                }
-            }
+  agent any
+    tools {nodejs "21.0.0"}
+      stages {
+        stage("Build") {
+          steps {
+            sh "npm install"
+            sh "npm run build"
+          }
         }
-    
-
+      }
+}
 
 
 // pipeline {

@@ -6,6 +6,7 @@ pipeline {
                         script{
                         def scannerHome = tool 'sonarqube-scanner';
                         withSonarQubeEnv(credentialsId:"SONAR_TOKEN",installationName:'sonarqube') {
+                          echo '${env.SONAR_HOST_URL}'
                         sh "${scannerHome}/bin/sonar-scanner"
                     }
                 }
